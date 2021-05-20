@@ -38,6 +38,15 @@ namespace WebApi.DotNetCore3
             // Para funcionar o método UseSqlServer na versão 3.1 do .NET Core, é preciso instalar o framework "Microsoft.EntityFrameWorkCore.SqlServer"
             // Para funcionar o Code First com os comandos "add-migration" e "update-database", é preciso instalar o framework "Microsoft.EntityFrameWorkCore.Tools"
             services.AddDbContext<ProdutosContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:8080");
+                                  });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
@@ -55,6 +64,8 @@ namespace WebApi.DotNetCore3
             }
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             // Realiza mapeamento dos Controllers
             app.UseEndpoints(endpoints =>

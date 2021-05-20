@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.DotNetCore3", "WebApi.DotNetCore3.csproj", "{4620404D-356C-4099-A89E-288EC6CB461D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.DotNetCore3", "WebApi.DotNetCore3.csproj", "{4620404D-356C-4099-A89E-288EC6CB461D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit_Produt_Tests", "..\NUnit_Produt_Tests\NUnit_Produt_Tests.csproj", "{FB07EF51-8481-446E-90F9-6CE7841A8F64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4620404D-356C-4099-A89E-288EC6CB461D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4620404D-356C-4099-A89E-288EC6CB461D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4620404D-356C-4099-A89E-288EC6CB461D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB07EF51-8481-446E-90F9-6CE7841A8F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB07EF51-8481-446E-90F9-6CE7841A8F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB07EF51-8481-446E-90F9-6CE7841A8F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB07EF51-8481-446E-90F9-6CE7841A8F64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
