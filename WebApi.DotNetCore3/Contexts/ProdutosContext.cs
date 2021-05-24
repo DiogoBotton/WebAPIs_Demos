@@ -11,6 +11,7 @@ namespace WebApi.DotNetCore3.Contexts
     public class ProdutosContext : DbContext
     {
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         public ProdutosContext(DbContextOptions<ProdutosContext> options) : base(options)
         {
@@ -23,6 +24,7 @@ namespace WebApi.DotNetCore3.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProdutoEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioEntityTypeConfiguration());
         }
     }
 }
