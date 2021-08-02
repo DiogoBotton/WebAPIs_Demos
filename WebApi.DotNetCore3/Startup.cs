@@ -15,6 +15,7 @@ using WebApi.DotNetCore3.Contexts;
 using WebApi.DotNetCore3.Helpers;
 using WebApi.DotNetCore3.Interfaces;
 using WebApi.DotNetCore3.Repositories;
+using WebApi.DotNetCore3.Services;
 
 namespace WebApi.DotNetCore3
 {
@@ -35,6 +36,8 @@ namespace WebApi.DotNetCore3
             // Injeção de Dependência para vincular interface de repositório com o repositório em si
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+            services.AddScoped<IFilesService, FilesService>();
 
             // Injeção de dependência da connectionString do banco de dados
             // Para funcionar o método UseSqlServer na versão 3.1 do .NET Core, é preciso instalar o framework "Microsoft.EntityFrameWorkCore.SqlServer"
@@ -106,6 +109,8 @@ namespace WebApi.DotNetCore3
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             // Realiza mapeamento dos Controllers
             app.UseEndpoints(endpoints =>
