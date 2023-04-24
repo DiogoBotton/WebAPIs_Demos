@@ -9,7 +9,7 @@ using WebApi.DotNetCore3.Contexts;
 namespace WebApi.DotNetCore3.Migrations
 {
     [DbContext(typeof(ProdutosContext))]
-    [Migration("20210524024128_ProdutosDb")]
+    [Migration("20230330053231_ProdutosDb")]
     partial class ProdutosDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

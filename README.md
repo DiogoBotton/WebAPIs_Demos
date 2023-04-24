@@ -4,4 +4,11 @@ Criação de API de produtos com fim de estudar as diferenças de implementaçã
 **Avisos**
 * Antes de tudo, instalar o framework "Microsoft.EntityFrameWorkCore.Relational"
 * Para funcionar o método UseSqlServer (StartUp) na versão 3.1 do .NET Core, é preciso instalar o framework "Microsoft.EntityFrameWorkCore.SqlServer"
-* Para funcionar o Code First com os comandos "add-migration" e "update-database", é preciso instalar o framework "Microsoft.EntityFrameWorkCore.Tools"
+* Para funcionar o Code First com os comandos "enable-migrations", "add-migration" e "update-database", é preciso instalar o framework "Microsoft.EntityFrameWorkCore.Tools"
+
+**Com PostGreSQL**
+* Necessário instalar o framework "Npgsql.EntityFrameworkCore.PostgreSQL"
+* Da mesma forma com o SQL Server, para funcionar Code First é necessário instalar o framework "Microsoft.EntityFrameWorkCore.Tools"
+* A diferença está na Start Up, ao adicionar a connection string, com os métodos AddEntityFrameworkNpgsql() e UseNpgsql(). Segue código abaixo:
+
+### `services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));`
