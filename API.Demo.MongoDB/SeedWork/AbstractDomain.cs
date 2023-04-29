@@ -11,6 +11,6 @@ namespace API.Demo.MongoDB.SeedWork
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public virtual int Id { get; protected set; }
+        public virtual string Id { get; protected set; }
     }
 }

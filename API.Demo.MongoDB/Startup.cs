@@ -34,11 +34,11 @@ namespace API.Demo.MongoDB
             services.AddControllers();
 
             // Injeção de dependência para configurar o classe de configuração do Mongo DB
-            services.Configure<IMongoSettings>(
-            Configuration.GetSection(nameof(IMongoSettings)));
+            services.Configure<MongoSettings>(
+            Configuration.GetSection(nameof(MongoSettings)));
 
             services.AddSingleton<IMongoSettings>(sp =>
-                sp.GetRequiredService<IOptions<IMongoSettings>>().Value);
+                sp.GetRequiredService<IOptions<MongoSettings>>().Value);
 
             // Configura MongoClient com a string de conexão de appsettings.json (Injeção de Dependência)
             services.AddSingleton<IMongoClient>(c =>

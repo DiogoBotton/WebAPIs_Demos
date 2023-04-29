@@ -8,9 +8,9 @@ namespace API.Demo.MongoDB.SeedWork
 {
     public interface IRepository<T> where T : AbstractDomain
     {
-        T Create(T objeto);
-        T GetById(string id);
-        List<T> GetAll();
-        void Update(T objeto);
+        Task CreateAsync(T objeto);
+        Task<List<T>> GetAllAsync();
+        void UpdateAsync(string id, T objeto);
+        void DeleteAsync(string id);
     }
 }

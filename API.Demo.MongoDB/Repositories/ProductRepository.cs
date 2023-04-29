@@ -20,5 +20,9 @@ namespace API.Demo.MongoDB.Repositories
             : base(mongoClient, clientSessionHandle, mongoSettings, mongoSettings.ProductCollectionName)
         {
         }
+
+        // ProductRepository herda de BaseRepository a propriedade "Collection" para acessar a coleção específica para consultas customizadas
+        public async Task<Product> GetById(string id) =>
+            await Collection.Find(f => f.Id == id).FirstOrDefaultAsync();
     }
 }

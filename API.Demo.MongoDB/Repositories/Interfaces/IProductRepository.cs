@@ -9,5 +9,6 @@ namespace API.Demo.MongoDB.Repositories.Interfaces
 {
     public interface IProductRepository : IRepository<Product>
     {
+        Task<Product> GetById(string id);
     }
 }
