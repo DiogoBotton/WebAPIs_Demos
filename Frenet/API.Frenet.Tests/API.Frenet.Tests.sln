@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33130.400
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Frenet.Tests", "API.Frenet.Tests.csproj", "{18530D3F-175F-46AB-8DD0-7EC78C08A5A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18530D3F-175F-46AB-8DD0-7EC78C08A5A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18530D3F-175F-46AB-8DD0-7EC78C08A5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18530D3F-175F-46AB-8DD0-7EC78C08A5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18530D3F-175F-46AB-8DD0-7EC78C08A5A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC40DCA1-D5C9-49B6-AA0D-561600D1DC80}
+	EndGlobalSection
+EndGlobal
