@@ -44,13 +44,13 @@ namespace API.Demo.MongoDB.SeedWork
         public async Task CreateAsync(T objeto) =>
             await Collection.InsertOneAsync(_clientSessionHandle, objeto);
 
-        public async void DeleteAsync(string id) =>
+        public async Task DeleteAsync(string id) =>
             await Collection.DeleteOneAsync(_clientSessionHandle, filter => filter.Id == id);
 
         public async Task<List<T>> GetAllAsync() =>
             await Collection.AsQueryable().ToListAsync();
 
-        public async void UpdateAsync(string id, T objeto) =>
+        public async Task UpdateAsync(string id, T objeto) =>
             // Replace => Substitui (inteiramente) um único documento
             await Collection.ReplaceOneAsync(_clientSessionHandle, filter => filter.Id == id, objeto);
     }

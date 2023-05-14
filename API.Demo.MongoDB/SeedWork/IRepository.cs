@@ -10,7 +10,7 @@ namespace API.Demo.MongoDB.SeedWork
     {
         Task CreateAsync(T objeto);
         Task<List<T>> GetAllAsync();
-        void UpdateAsync(string id, T objeto);
-        void DeleteAsync(string id);
+        Task UpdateAsync(string id, T objeto);
+        Task DeleteAsync(string id);
     }
 }

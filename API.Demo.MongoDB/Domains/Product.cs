@@ -18,5 +18,12 @@ namespace API.Demo.MongoDB.Domains
             Price = price;
             Units = units;
         }
+
+        public void Update(string name, double price, int units)
+        {
+            Name = name;
+            Price = price;
+            Units = units;
+        }
     }
 }
