@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  poc_auth:
+    image: ${DOCKER_REGISTRY-}pocauth
+    build:
+      context: .
+      dockerfile: POC_Auth/Dockerfile
+
+  #poc_auth_consumer:
+  #  image: ${DOCKER_REGISTRY-}pocauthconsumer
+  #  build:
+  #    context: .
+  #    dockerfile: POC_Auth_Consumer/Dockerfile
+

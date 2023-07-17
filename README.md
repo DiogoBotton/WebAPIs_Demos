@@ -12,3 +12,10 @@ Criação de API's com o fim de estudar as diferenças de implementação com .N
 * A diferença está na Start Up, ao adicionar a connection string, com os métodos AddEntityFrameworkNpgsql() e UseNpgsql(). Segue código abaixo:
 
 ### `services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));`
+
+**Autenticação JWT Assimétrica (Projeto POC_Auth)**
+
+* Realizado com apoio abaixo:
+https://dev.to/eduardstefanescu/jwt-authentication-with-asymmetric-encryption-using-certificates-in-asp-net-core-2o7e
+
+https://github.com/StefanescuEduard/JwtAuthentication
