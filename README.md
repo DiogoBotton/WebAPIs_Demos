@@ -13,6 +13,10 @@ Criação de API's com o fim de estudar as diferenças de implementação com .N
 
 ### `services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));`
 
+* Exemplo código Db Scaffold utlizando Postgres (Database First)
+### `Scaffold-DbContext "Host=localhost;Port=5432;Database=splay;Username=postgres;Password=Elefante@132;" Npgsql.EntityFrameworkCore.PostgreSQL -o Models`
+* Entre aspas, logo após o scaffold, a connection string para o banco, em seguida, o pacote nuget do banco de dados e o nome da pasta que será criada as entidades e context
+
 **Autenticação JWT Assimétrica (Projeto POC_Auth)**
 
 * Realizado com apoio abaixo:
