@@ -22,12 +22,27 @@ namespace POC_ValidateImg.Controllers
         /// </summary>
         /// <param name="file"></param>
         /// <returns>Resolução da imagem (width e height) e tamanho da imagem (length)</returns>
-        [HttpPost]
-        public async Task<IActionResult> ValidateImage([FromForm] ValidateImgViewModel file)
+        [HttpPost("system-drawing")]
+        public async Task<IActionResult> ValidateImageSystemDrawing([FromForm] ValidateImgViewModel file)
         {
             try
             {
-                var result = await _imageService.ValidateImage(file.File);
+                var result = await _imageService.ValidateImageSystemDrawing(file.File);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost("image-sharp")]
+        public async Task<IActionResult> ValidateImageSharp([FromForm] ValidateImgViewModel file)
+        {
+            try
+            {
+                var result = await _imageService.ValidateImageImageSharp(file.File);
 
                 return Ok(result);
             }

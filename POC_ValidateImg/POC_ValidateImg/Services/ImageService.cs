@@ -1,16 +1,26 @@
 ﻿using POC_ValidateImg.Models;
 using POC_ValidateImg.Services.Interfaces;
-using System.Drawing;
 
 namespace POC_ValidateImg.Services;
 
 public class ImageService : IImageService
 {
-    public async Task<InfosImage> ValidateImage(IFormFile file)
+    public async Task<InfosImage> ValidateImageImageSharp(IFormFile file)
     {
         using (var fileImg = file.OpenReadStream())
         {
-            using (var img = Image.FromStream(fileImg))
+            using (var img = await SixLabors.ImageSharp.Image.LoadAsync(fileImg))
+            {
+                return new InfosImage(img.Width, img.Height, fileImg.Length);
+            }
+        }
+    }
+
+    public async Task<InfosImage> ValidateImageSystemDrawing(IFormFile file)
+    {
+        using (var fileImg = file.OpenReadStream())
+        {
+            using (var img = System.Drawing.Image.FromStream(fileImg))
             {
                 return await Task.FromResult(new InfosImage(img.Width, img.Height, fileImg.Length));
             }

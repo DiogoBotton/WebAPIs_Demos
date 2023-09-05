@@ -4,5 +4,6 @@ namespace POC_ValidateImg.Services.Interfaces;
 
 public interface IImageService
 {
-    Task<InfosImage> ValidateImage(IFormFile file);
+    Task<InfosImage> ValidateImageSystemDrawing(IFormFile file);
+    Task<InfosImage> ValidateImageImageSharp(IFormFile file);
 }
