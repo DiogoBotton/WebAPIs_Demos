@@ -27,7 +27,7 @@ namespace POC_ImportZip.Controllers
         {
             try
             {
-                var result = await _zipService.ImportZip(file.File);
+                var result = await _zipService.ImportZipWithSystem(file.File);
 
                 return Ok(result);
             }
