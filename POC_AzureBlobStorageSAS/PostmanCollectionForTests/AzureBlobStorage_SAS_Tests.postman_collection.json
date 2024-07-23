@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "7a0dac2f-cd8a-466e-b602-431bfd7e8419",
+		"name": "AzureBlobStorage_SAS_Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10427838",
+		"_collection_link": "https://grey-star-742998.postman.co/workspace/Correios~65d60e9a-d583-4d13-82b0-f53dcac2a4ea/collection/10427838-7a0dac2f-cd8a-466e-b602-431bfd7e8419?action=share&source=collection_link&creator=10427838"
+	},
+	"item": [
+		{
+			"name": "GetTokenSas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5247/api/BlobStorage/GetTokenSas?blobName=meuarquivo.txt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5247",
+					"path": [
+						"api",
+						"BlobStorage",
+						"GetTokenSas"
+					],
+					"query": [
+						{
+							"key": "blobName",
+							"value": "meuarquivo.txt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UploadFile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-ms-blob-type",
+						"value": "BlockBlob",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/Diogo Botton/Downloads/meuarquivo.txt"
+					}
+				},
+				"url": {
+					"raw": "https://legadoblobstorage.blob.core.windows.net/imagens/meuarquivo.txt?sv=2024-08-04&se=2024-07-23T18%3A32%3A32Z&sr=b&sp=racwdxyltmei&sig=A4SbFJOl1qOSShHJi5VgYhBkmV0efTW9497O4OtZSGo%3D",
+					"protocol": "https",
+					"host": [
+						"legadoblobstorage",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						"imagens",
+						"meuarquivo.txt"
+					],
+					"query": [
+						{
+							"key": "sv",
+							"value": "2024-08-04"
+						},
+						{
+							"key": "se",
+							"value": "2024-07-23T18%3A32%3A32Z"
+						},
+						{
+							"key": "sr",
+							"value": "b"
+						},
+						{
+							"key": "sp",
+							"value": "racwdxyltmei"
+						},
+						{
+							"key": "sig",
+							"value": "A4SbFJOl1qOSShHJi5VgYhBkmV0efTW9497O4OtZSGo%3D"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

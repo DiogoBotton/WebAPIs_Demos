@@ -1,0 +1,6 @@
+@POC_PaymentIntegration_HostAddress = http://localhost:5155
+
+GET {{POC_PaymentIntegration_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
