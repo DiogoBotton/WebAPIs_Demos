@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api</name>
+    </assembly>
+    <members>
+        <member name="T:Api.Controllers.UsersController">
+            <summary>
+            Users Controller
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.#ctor(Services.Services.UserServices.Interfaces.IUserService)">
+            <summary>
+            Users Controller Constructor
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.Get(System.Threading.CancellationToken)">
+            <summary>
+            List all users
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.Post(Services.DTOs.Requests.Users.UserCreate,System.Threading.CancellationToken)">
+            <summary>
+            Add a new user
+            </summary>
+        </member>
+        <member name="T:Api.DI.ServiceCollectionExtension">
+            <summary>
+            API Dependencies Configuration
+            </summary>
+        </member>
+        <member name="M:Api.DI.ServiceCollectionExtension.AddApiDependencies(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Reflection.Assembly)">
+            <summary>
+            API Dependencies Configuration
+            </summary>
+        </member>
+    </members>
+</doc>
