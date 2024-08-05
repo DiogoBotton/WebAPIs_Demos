@@ -1,8 +1,4 @@
-﻿using Domains.Models.Users.Interfaces;
-using Domains.SeedWork;
-using Infrastructure.Contexts;
-using Infrastructure.Repositories.Base;
-using Infrastructure.Repositories;
+﻿using Infrastructure.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

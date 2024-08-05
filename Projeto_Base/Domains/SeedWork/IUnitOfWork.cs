@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Domains.SeedWork;
 
-namespace Domains.SeedWork
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        Task SaveDbChanges(CancellationToken cancellationToken = default(CancellationToken));
-    }
+    Task SaveDbChanges(CancellationToken cancellationToken = default(CancellationToken));
 }

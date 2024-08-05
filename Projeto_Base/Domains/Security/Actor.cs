@@ -27,9 +27,4 @@ public class Actor
         if (Claims.Where(d => d.Type == "roles").Any())
             Roles = Claims.FirstOrDefault(d => d.Type == "roles").Value.Split(",").Select(d => Enum.Parse<Profile>(d));
     }
-
-    private static IEnumerable<string> SystemsToList(string systems)
-    {
-        return systems.Split(",").ToList();
-    }
 }

@@ -12,7 +12,7 @@ public class User : AbstractDomain
     public string Cellphone { get; set; }
 
     public Profile Profile { get; set; }
-    public bool Status { get; set; }
+    public bool Status { get; set; } = true;
 
     public byte[] PasswordHash { get; set; }
     public byte[] PasswordSalt { get; set; }

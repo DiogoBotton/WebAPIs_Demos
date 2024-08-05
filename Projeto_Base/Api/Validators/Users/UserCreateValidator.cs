@@ -1,15 +1,18 @@
-﻿using FluentValidation;
+﻿using Api.Validators.Unique;
+using FluentValidation;
+using Infrastructure.Contexts;
 using Services.DTOs.Requests.Users;
 
-namespace Api.Validators;
+namespace Api.Validators.Users;
 
 internal class UserCreateValidator : AbstractValidator<UserCreate>
 {
-    public UserCreateValidator()
+    public UserCreateValidator(ApiDbContext db)
     {
         RuleFor(x => x.Email)
             .NotEmpty()
-            .EmailAddress();
+            .EmailAddress()
+            .SetAsyncValidator(new UniqueUserValidator<UserCreate>(db));
 
         RuleFor(x => x.Name)
             .NotEmpty()

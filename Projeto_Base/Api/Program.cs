@@ -1,5 +1,6 @@
 using System.Reflection;
 using Api.DI;
+using Api.Seed;
 using Infrastructure.Extensions;
 using Services.Swagger;
 
@@ -40,12 +41,12 @@ else
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 
-    //app.MapGet("/seed",
-    //    async (DbSeeder dbSeeder) =>
-    //    {
-    //        (bool isSeed, string? error) = await dbSeeder.SeedData();
-    //        return Results.Ok(new { Seeder = isSeed, Error = error });
-    //    });
+    app.MapGet("/seed",
+        async (DbSeeder dbSeeder) =>
+        {
+            (bool isSeed, string? error) = await dbSeeder.SeedData();
+            return Results.Ok(new { Seeder = isSeed, Error = error });
+        });
 }
 
 if (!builder.Environment.IsProduction() && !builder.Environment.IsEnvironment("Test"))

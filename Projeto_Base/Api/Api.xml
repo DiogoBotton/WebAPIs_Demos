@@ -9,19 +9,54 @@
             Users Controller
             </summary>
         </member>
-        <member name="M:Api.Controllers.UsersController.#ctor(Services.Services.UserServices.Interfaces.IUserService)">
+        <member name="M:Api.Controllers.UsersController.#ctor(Services.Services.UserServices.Interfaces.IUserService,Services.Paginator.Services.Interfaces.IPaginatedService{Domains.Models.Users.User})">
             <summary>
             Users Controller Constructor
             </summary>
         </member>
-        <member name="M:Api.Controllers.UsersController.Get(System.Threading.CancellationToken)">
+        <member name="M:Api.Controllers.UsersController.GetPaginationData(Services.DTOs.Results.PaginationDataRequest,System.Threading.CancellationToken)">
+            <summary>
+            Get pagination metadata
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.Get(Services.DTOs.Filters.PaginatedFilter,System.Threading.CancellationToken)">
             <summary>
             List all users
             </summary>
         </member>
-        <member name="M:Api.Controllers.UsersController.Post(Services.DTOs.Requests.Users.UserCreate,System.Threading.CancellationToken)">
+        <member name="M:Api.Controllers.UsersController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Detail a User by Id
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.Add(Services.DTOs.Requests.Users.UserCreate,System.Threading.CancellationToken)">
             <summary>
             Add a new user
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.Update(Services.DTOs.Requests.Users.UserUpdate,System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Update a user
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UsersController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Delete a user
+            </summary>
+        </member>
+        <member name="T:Api.DI.CustomActionFilter">
+            <summary>
+            Custom Action Filter
+            </summary>
+        </member>
+        <member name="M:Api.DI.CustomActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            On Action Executing
+            </summary>
+        </member>
+        <member name="M:Api.DI.CustomActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            On Action Executed
             </summary>
         </member>
         <member name="T:Api.DI.ServiceCollectionExtension">
@@ -33,6 +68,74 @@
             <summary>
             API Dependencies Configuration
             </summary>
+        </member>
+        <member name="T:Api.Seed.DbSeeder">
+            <summary>
+            Db Seeder
+            </summary>
+        </member>
+        <member name="M:Api.Seed.DbSeeder.#ctor(Infrastructure.Contexts.ApiDbContext)">
+            <summary>
+            Db Seeder Constructor
+            </summary>
+        </member>
+        <member name="M:Api.Seed.DbSeeder.CleanData">
+            <summary>
+            Clean Data
+            </summary>
+        </member>
+        <member name="M:Api.Seed.DbSeeder.CleanDataTests">
+            <summary>
+            Clean Data Tests
+            </summary>
+        </member>
+        <member name="M:Api.Seed.DbSeeder.SeedData">
+            <summary>
+            Seed independent entities to context Db configuration
+            </summary>
+        </member>
+        <member name="M:Api.Seed.DbSeeder.ExecuteDevelopment">
+            <summary>
+            Execute Seed Data in Development Environment
+            </summary>
+        </member>
+        <member name="M:Api.Seed.DbSeeder.ExecuteTests">
+            <summary>
+            Execute Seed Data in Tests Environment
+            </summary>
+        </member>
+        <member name="T:Api.Validators.Unique.UniqueUserValidator`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Api.Validators.Unique.UniqueUserValidator`1.#ctor(Infrastructure.Contexts.ApiDbContext)">
+            <summary>
+            
+            </summary>
+            <param name="apiDbContext"></param>
+        </member>
+        <member name="P:Api.Validators.Unique.UniqueUserValidator`1.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Api.Validators.Unique.UniqueUserValidator`1.GetDefaultMessageTemplate(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Validators.Unique.UniqueUserValidator`1.IsValidAsync(FluentValidation.ValidationContext{`0},System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

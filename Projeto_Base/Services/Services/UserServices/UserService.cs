@@ -4,10 +4,12 @@ using FluentValidation;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Services.DTOs;
+using Services.DTOs.Filters;
 using Services.DTOs.Requests.Users;
 using Services.DTOs.Results;
 using Services.DTOs.Results.Users;
 using Services.Extensions;
+using Services.Paginator.Extensions;
 using Services.Services.UserServices.Interfaces;
 using System.Net;
 
@@ -34,7 +36,7 @@ public class UserService : IUserService
             var user = request.Adapt<User>();
 
             await _userRepository.CreateAsync(user, cancellationToken);
-            await _userRepository.UnitOfWork.SaveDbChanges();
+            await _userRepository.UnitOfWork.SaveDbChanges(cancellationToken);
 
             return new RegisterResult<Guid>
             {
@@ -48,39 +50,99 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> Delete(Guid Id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<UserResult> Detail(Guid Id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<BaseResponse<ListResult<UserResult>>> ListAll(CancellationToken cancellationToken)
+    public async Task<BaseResponse<bool>> Delete(Guid Id, CancellationToken cancellationToken)
     {
         try
         {
-            var users = await _userRepository
-                .List(x => x.Address)
-                .ProjectToType<UserResult>()
-                .ToListAsync(cancellationToken);
+            var user = await _userRepository.GetById(Id);
 
-            return new ListResult<UserResult>
-            {
-                Items = users
-            };
+            if (user == null)
+                return new ErrorResponse("User_Not_Found", "Usuário não encontrado.")
+                    .WithErrorStatusCode<bool>(HttpStatusCode.NotFound);
+
+            user.DeletedAt = DateTime.Now;
+
+            await _userRepository.UnitOfWork.SaveDbChanges(cancellationToken);
+
+            return true;
         }
         catch (Exception)
         {
             return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
-                .WithErrorStatusCode<ListResult<UserResult>>(HttpStatusCode.InternalServerError);
+                .WithErrorStatusCode<bool>(HttpStatusCode.InternalServerError);
         }
     }
 
-    public async Task<bool> Update(UserCreate model, CancellationToken cancellationToken)
+    public async Task<BaseResponse<UserResult>> Detail(Guid Id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var user = await _userRepository.GetById(Id, x => x.Address);
+
+            if (user == null)
+                return new ErrorResponse("User_Not_Found", "Usuário não encontrado.")
+                    .WithErrorStatusCode<UserResult>(HttpStatusCode.NotFound);
+
+            return user.Adapt<UserResult>();
+        }
+        catch (Exception)
+        {
+            return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
+                .WithErrorStatusCode<UserResult>(HttpStatusCode.InternalServerError);
+        }
+    }
+
+    public async Task<BaseResponse<PageResult<UserResult>>> ListAll(PaginatedFilter filter, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var users = _userRepository
+                .List(x => x.Address);
+
+            if (!string.IsNullOrEmpty(filter.Search))
+                users = users.Where(x => x.Name.Contains(filter.Search) || x.Email.Contains(filter.Search));
+
+            if (filter.Status.HasValue)
+                users = users.Where(x => x.Status == filter.Status);
+
+            var result = await users
+                .ProjectToType<UserResult>()
+                .PaginateBy(filter, x => x.Name)
+                .ToListAsync(cancellationToken);
+
+            return new PageResult<UserResult>(result);
+        }
+        catch (Exception)
+        {
+            return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
+                .WithErrorStatusCode<PageResult<UserResult>>(HttpStatusCode.InternalServerError);
+        }
+    }
+
+    public async Task<BaseResponse<bool>> Update(UserUpdate request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var user = await _userRepository.GetById(request.Id, x => x.Address);
+
+            if (user == null)
+                return new ErrorResponse("User_Not_Found", "Usuário não encontrado.")
+                    .WithErrorStatusCode<bool>(HttpStatusCode.NotFound);
+
+            if (request.Email != user.Email)
+                if (await _userRepository.EmailExists(request.Email, cancellationToken))
+                    return new ErrorResponse("Email_Already_Exists", "Este email já existe na plataforma.");
+
+            request.Adapt(user);
+
+            await _userRepository.UnitOfWork.SaveDbChanges(cancellationToken);
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
+                .WithErrorStatusCode<bool>(HttpStatusCode.InternalServerError);
+        }
     }
 }

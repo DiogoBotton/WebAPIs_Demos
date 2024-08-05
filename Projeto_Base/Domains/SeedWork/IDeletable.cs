@@ -5,7 +5,6 @@ public interface IDeletable
     public DateTime? DeletedAt { get; set; }
 }
 
-
 public static class DeletableExtensions
 {
     public static IQueryable<T> OnlyActives<T>(this IQueryable<T> query) where T : IDeletable

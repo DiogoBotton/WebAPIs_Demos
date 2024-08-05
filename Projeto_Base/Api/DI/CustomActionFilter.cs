@@ -4,12 +4,21 @@ using Services.DTOs;
 
 namespace Api.DI;
 
+/// <summary>
+/// Custom Action Filter
+/// </summary>
 public class CustomActionFilter : IActionFilter
 {
+    /// <summary>
+    /// On Action Executing
+    /// </summary>
     public void OnActionExecuting(ActionExecutingContext context)
     {
     }
 
+    /// <summary>
+    /// On Action Executed
+    /// </summary>
     public void OnActionExecuted(ActionExecutedContext context)
     {
         if (context.Result is ObjectResult objectResult)

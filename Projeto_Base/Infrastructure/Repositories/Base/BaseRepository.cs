@@ -60,13 +60,22 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
             .OnlyActives();
 
         foreach (var includeProperty in includeProperties)
-        {
             query = query.Include(includeProperty);
-        }
 
         return query;
     }
 
     public IQueryable<TEntity> ListBy(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includeProperties)
     => List(includeProperties).Where(where);
+
+    public async Task<TEntity> GetById(Guid Id, params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        var entity = _entity
+            .OnlyActives();
+
+        foreach (var includeProperty in includeProperties)
+            entity = entity.Include(includeProperty);
+
+        return await entity.FirstOrDefaultAsync(x => x.Id == Id);
+    }
 }

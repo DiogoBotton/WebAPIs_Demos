@@ -24,6 +24,9 @@ using Services.Services.UserServices;
 using Services.DTOs;
 using Infrastructure.Swagger;
 using Services.Extensions;
+using Api.Seed;
+using Services.Paginator.Services;
+using Services.Paginator.Services.Interfaces;
 
 namespace Api.DI;
 
@@ -130,18 +133,13 @@ public static partial class ServiceCollectionExtension
                 Example = new OpenApiString("00:00:00")
             });
 
-            options.TagActionsBy(d => new List<string>
-                {
-                    d.ActionDescriptor.EndpointMetadata.OfType<EndpointGroupNameAttribute>().FirstOrDefault()?.EndpointGroupName
-                    ?? (d.ActionDescriptor as ControllerActionDescriptor).ControllerName,
-                });
-
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetEntryAssembly().GetName().Name}.xml"));
+            options.IncludeXmlComments("Api.xml");
         });
     }
 
     private static void AddServices(this IServiceCollection services)
     {
+        services.AddScoped(typeof(IPaginatedService<>), typeof(PaginatedService<>));
         services.AddScoped<IUserService, UserService>();
     }
 
@@ -154,6 +152,16 @@ public static partial class ServiceCollectionExtension
     {
         services.AddDbContext<ApiDbContext>(options =>
         {
+            // Npgsql (Postgres)
+            //options.UseNpgsql(configuration.GetConnectionString("Default"), 
+            //    b => b.MigrationsAssembly("Infrastructure"));
+
+
+            // Sql Server
+            //options.UseSqlServer(configuration.GetConnectionString("Default"),
+            //    b => b.MigrationsAssembly("Infrastructure"));
+
+            // MySql
             options.UseMySql(configuration.GetConnectionString("Default"),
                          ServerVersion.AutoDetect(configuration.GetConnectionString("Default")),
                          b => b.MigrationsAssembly("Infrastructure"))
@@ -165,6 +173,11 @@ public static partial class ServiceCollectionExtension
 
         services.TryAddTransient<IValidatorFactory, ServiceProviderValidatorFactory>();
         services.AddFluentValidationRulesToSwagger();
+    }
+
+    private static void AddSeeder(this IServiceCollection services)
+    {
+        services.AddScoped<DbSeeder>();
     }
     #endregion
 
@@ -192,6 +205,8 @@ public static partial class ServiceCollectionExtension
         services.AddServices();
 
         services.AddDbContext(configuration);
+
+        services.AddSeeder();
 
         services.ConfigureFluentValidator(assembly);
 
