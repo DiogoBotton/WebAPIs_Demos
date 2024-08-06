@@ -4,14 +4,13 @@ namespace Services.DTOs;
 
 public class Response : IBaseResponse
 {
-    private static Response _success;
-    public static Response Success => _success ??= new Response { StatusCode = HttpStatusCode.OK };
-    public static Response SuccessWithStatus(HttpStatusCode statusCode = HttpStatusCode.OK) => new() { StatusCode = statusCode };
-
     public ErrorResponse Error { get; set; }
     public HttpStatusCode StatusCode { get; set; }
 
-    public static Response Throw(ErrorResponse errorResponse, HttpStatusCode statusCode = HttpStatusCode.BadRequest) => new()
+    public static Response Success(HttpStatusCode statusCode = HttpStatusCode.OK) => new() { StatusCode = statusCode };
+    public static Response ErrorHandle(string name, string description, HttpStatusCode statusCode = HttpStatusCode.BadRequest) => Throw(new ErrorResponse(name, description), statusCode);
+
+    private static Response Throw(ErrorResponse errorResponse, HttpStatusCode statusCode = HttpStatusCode.BadRequest) => new()
     {
         Error = errorResponse,
         StatusCode = statusCode

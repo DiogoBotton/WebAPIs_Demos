@@ -57,17 +57,17 @@ public class UserService : IUserService
             var user = await _userRepository.GetById(Id);
 
             if (user == null)
-                return Response.Throw(new ErrorResponse("User_Not_Found", "Usuário não encontrado."), HttpStatusCode.NotFound);
+                return Response.ErrorHandle("User_Not_Found", "Usuário não encontrado.", HttpStatusCode.NotFound);
 
             user.DeletedAt = DateTime.Now;
 
             await _userRepository.UnitOfWork.SaveDbChanges(cancellationToken);
 
-            return Response.Success;
+            return Response.Success();
         }
         catch (Exception)
         {
-            return Response.Throw(new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação."), HttpStatusCode.InternalServerError);
+            return Response.ErrorHandle("Internal_Server_Error", "Houve algum erro na realização da operação.", HttpStatusCode.InternalServerError);
         }
     }
 
@@ -131,7 +131,7 @@ public class UserService : IUserService
             var user = await _userRepository.GetById(request.Id, x => x.Address);
 
             if (user == null)
-                return Response.Throw(new ErrorResponse("User_Not_Found", "Usuário não encontrado."), HttpStatusCode.NotFound);
+                return Response.ErrorHandle("User_Not_Found", "Usuário não encontrado.", HttpStatusCode.NotFound);
 
             if (request.Email != user.Email)
                 if (await _userRepository.EmailExists(request.Email, cancellationToken))
@@ -141,11 +141,11 @@ public class UserService : IUserService
 
             await _userRepository.UnitOfWork.SaveDbChanges(cancellationToken);
 
-            return Response.Success;
+            return Response.Success();
         }
         catch (Exception)
         {
-            return Response.Throw(new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação."), HttpStatusCode.InternalServerError);
+            return Response.ErrorHandle("Internal_Server_Error", "Houve algum erro na realização da operação.", HttpStatusCode.InternalServerError);
         }
     }
 }
