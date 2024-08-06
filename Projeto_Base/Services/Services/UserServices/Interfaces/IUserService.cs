@@ -12,6 +12,6 @@ public interface IUserService
     Task<BaseResponse<PageResult<UserResult>>> ListAll(PaginatedFilter request, CancellationToken cancellationToken = default);
     Task<BaseResponse<UserResult>> Detail(Guid Id, CancellationToken cancellationToken = default);
     Task<BaseResponse<RegisterResult<Guid>>> Create(UserCreate request, CancellationToken cancellationToken = default);
-    Task<BaseResponse<bool>> Update(UserUpdate request, CancellationToken cancellationToken = default);
-    Task<BaseResponse<bool>> Delete(Guid Id, CancellationToken cancellationToken = default);
+    Task<Response> Update(UserUpdate request, CancellationToken cancellationToken = default);
+    Task<Response> Delete(Guid Id, CancellationToken cancellationToken = default);
 }

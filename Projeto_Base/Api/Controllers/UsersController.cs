@@ -61,7 +61,7 @@ public class UsersController : ControllerBase
     /// Update a user
     /// </summary>
     [HttpPut("{UserId}")]
-    public async Task<BaseResponse<bool>> Update([FromBody] UserUpdate request, [FromRoute] Guid UserId, CancellationToken cancellationToken)
+    public async Task<Response> Update([FromBody] UserUpdate request, [FromRoute] Guid UserId, CancellationToken cancellationToken)
     {
         request.Id = UserId;
         return await _userService.Update(request, cancellationToken);
@@ -71,6 +71,6 @@ public class UsersController : ControllerBase
     /// Delete a user
     /// </summary>
     [HttpDelete("{UserId}")]
-    public async Task<BaseResponse<bool>> Delete([FromRoute] Guid UserId, CancellationToken cancellationToken)
+    public async Task<Response> Delete([FromRoute] Guid UserId, CancellationToken cancellationToken)
         => await _userService.Delete(UserId, cancellationToken);
 }

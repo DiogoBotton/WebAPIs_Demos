@@ -8,14 +8,7 @@ public class BaseResponseJsonConverter<T> : JsonConverter<BaseResponse<T>>
 {
     public override BaseResponse<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(ref reader, options);
-        if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.Name))
-        {
-            return new BaseResponse<T>(errorResponse);
-        }
-
-        var result = JsonSerializer.Deserialize<T>(ref reader, options);
-        return new BaseResponse<T>(result);
+        throw new NotImplementedException();
     }
 
     public override void Write(Utf8JsonWriter writer, BaseResponse<T> value, JsonSerializerOptions options)

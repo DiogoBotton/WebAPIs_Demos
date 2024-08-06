@@ -19,6 +19,7 @@ builder.Services.AddControllers(options =>
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new BaseResponseJsonConverterFactory());
+        options.JsonSerializerOptions.Converters.Add(new ResponseJsonConverterFactory());
     });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
