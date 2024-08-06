@@ -135,7 +135,7 @@ public class UserService : IUserService
 
             if (request.Email != user.Email)
                 if (await _userRepository.EmailExists(request.Email, cancellationToken))
-                    return new ErrorResponse("Email_Already_Exists", "Este email já existe na plataforma.");
+                    return Response.ErrorHandle("Email_Exists", "O e-mail informado já está em uso.");
 
             request.Adapt(user);
 

@@ -1,7 +1,7 @@
-﻿using Services.DTOs;
+﻿using Stick.Core.Responses;
 using System.Net;
 
-namespace Services.Extensions;
+namespace Stick.Core.Responses.Extensions;
 
 public static class ResponseExtensions
 {
