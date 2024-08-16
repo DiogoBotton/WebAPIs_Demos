@@ -4,7 +4,7 @@ namespace Services.DTOs.Requests;
 
 public abstract class PageRequest
 {
-    private const int MaxPageSize = 50;
+    public virtual int MaxPageSize { get; set; } = 50;
     private int _pageSize = 30;
 
     public int Page { get; set; } = 1;

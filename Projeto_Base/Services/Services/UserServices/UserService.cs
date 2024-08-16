@@ -65,9 +65,9 @@ public class UserService : IUserService
 
             return Response.Success();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return Response.ErrorHandle("Internal_Server_Error", "Houve algum erro na realização da operação.", HttpStatusCode.InternalServerError);
+            return Response.ErrorHandle("Internal_Server_Error", $"{ex.StackTrace}", HttpStatusCode.InternalServerError);
         }
     }
 
@@ -103,17 +103,10 @@ public class UserService : IUserService
             if (request.Status.HasValue)
                 users = users.Where(x => x.Status == request.Status);
 
-            List<UserResult> result;
-
-            if (request.IsPaginated)
-                result = await users
-                    .ProjectToType<UserResult>()
-                    .PaginateBy(request, x => x.Name)
-                    .ToListAsync(cancellationToken);
-            else
-                result = await users
-                    .ProjectToType<UserResult>()
-                    .ToListAsync(cancellationToken);
+            var result = await users
+                .ProjectToType<UserResult>()
+                .PaginateBy(request, x => x.Name)
+                .ToListAsync(cancellationToken);
 
             return new PageResult<UserResult>(result);
         }
