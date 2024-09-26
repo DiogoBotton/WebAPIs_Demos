@@ -23,7 +23,7 @@ public class CustomActionFilter : IActionFilter
     {
         if (context.Result is ObjectResult objectResult)
             // Verifica o tipo de resultado e ajusta o status code conforme necessário
-            if (objectResult.Value is IBaseResponse baseResponse)
+            if (objectResult.Value is IResponse baseResponse)
                 context.HttpContext.Response.StatusCode = (int)baseResponse.StatusCode;
     }
 }

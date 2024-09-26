@@ -18,7 +18,7 @@ builder.Services.AddControllers(options =>
     })
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.Converters.Add(new BaseResponseJsonConverterFactory());
+        options.JsonSerializerOptions.Converters.Add(new ResponseOfJsonConverterFactory());
         options.JsonSerializerOptions.Converters.Add(new ResponseJsonConverterFactory());
     });
 builder.Services.AddEndpointsApiExplorer();

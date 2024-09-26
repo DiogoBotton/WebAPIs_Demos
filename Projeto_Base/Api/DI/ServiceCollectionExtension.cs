@@ -112,7 +112,7 @@ public static partial class ServiceCollectionExtension
             };
 
             options.CustomSchemaIds(d => d.GetSchemaId());
-            options.OperationFilter<BaseResponseOperationFilter>();
+            options.OperationFilter<ResponseOfOperationFilter>();
 
             options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 

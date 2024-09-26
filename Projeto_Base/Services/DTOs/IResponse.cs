@@ -2,7 +2,7 @@
 
 namespace Services.DTOs;
 
-public interface IBaseResponse
+public interface IResponse
 {
     public HttpStatusCode StatusCode { get; set; }
 }

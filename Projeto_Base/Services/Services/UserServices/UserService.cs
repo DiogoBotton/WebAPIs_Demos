@@ -25,7 +25,7 @@ public class UserService : IUserService
         _userCreateValidator = userCreateValidator;
     }
 
-    public async Task<BaseResponse<RegisterResult<Guid>>> Create(UserCreate request, CancellationToken cancellationToken)
+    public async Task<ResponseOf<RegisterResult<Guid>>> Create(UserCreate request, CancellationToken cancellationToken)
     {
         try
         {
@@ -45,7 +45,7 @@ public class UserService : IUserService
         }
         catch (Exception)
         {
-            return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
+            return new Error("Internal_Server_Error", "Houve algum erro na realização da operação.")
                 .WithErrorStatusCode<RegisterResult<Guid>>(HttpStatusCode.InternalServerError);
         }
     }
@@ -71,26 +71,25 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<BaseResponse<UserResult>> Detail(Guid Id, CancellationToken cancellationToken)
+    public async Task<ResponseOf<UserResult>> Detail(Guid Id, CancellationToken cancellationToken)
     {
         try
         {
             var user = await _userRepository.GetById(Id, x => x.Address);
 
             if (user == null)
-                return new ErrorResponse("User_Not_Found", "Usuário não encontrado.")
-                    .WithErrorStatusCode<UserResult>(HttpStatusCode.NotFound);
+                return ErrorFactory.NotFoundError("Usuário não encontrado.");
 
             return user.Adapt<UserResult>();
         }
         catch (Exception)
         {
-            return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
+            return new Error("Internal_Server_Error", "Houve algum erro na realização da operação.")
                 .WithErrorStatusCode<UserResult>(HttpStatusCode.InternalServerError);
         }
     }
 
-    public async Task<BaseResponse<PageResult<UserResult>>> ListAll(PaginatedFilter request, CancellationToken cancellationToken)
+    public async Task<ResponseOf<PageResult<UserResult>>> ListAll(PaginatedFilter request, CancellationToken cancellationToken)
     {
         try
         {
@@ -112,7 +111,7 @@ public class UserService : IUserService
         }
         catch (Exception)
         {
-            return new ErrorResponse("Internal_Server_Error", "Houve algum erro na realização da operação.")
+            return new Error("Internal_Server_Error", "Houve algum erro na realização da operação.")
                 .WithErrorStatusCode<PageResult<UserResult>>(HttpStatusCode.InternalServerError);
         }
     }

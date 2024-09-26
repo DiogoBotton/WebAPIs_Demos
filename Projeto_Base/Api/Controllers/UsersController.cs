@@ -33,28 +33,28 @@ public class UsersController : ControllerBase
     /// Get pagination metadata
     /// </summary>
     [HttpGet("pagination")]
-    public async Task<BaseResponse<PaginationDataResult>> GetPaginationData([FromQuery] PaginationDataRequest request, CancellationToken cancellationToken)
+    public async Task<ResponseOf<PaginationDataResult>> GetPaginationData([FromQuery] PaginationDataRequest request, CancellationToken cancellationToken)
         => await _paginatedService.GetPaginatedDataAsync(request, cancellationToken);
 
     /// <summary>
     /// List all users
     /// </summary>
     [HttpGet]
-    public async Task<BaseResponse<PageResult<UserResult>>> Get([FromQuery] PaginatedFilter request, CancellationToken cancellationToken)
+    public async Task<ResponseOf<PageResult<UserResult>>> Get([FromQuery] PaginatedFilter request, CancellationToken cancellationToken)
         => await _userService.ListAll(request, cancellationToken);
 
     /// <summary>
     /// Detail a User by Id
     /// </summary>
     [HttpGet("{UserId}")]
-    public async Task<BaseResponse<UserResult>> GetById([FromRoute] Guid UserId, CancellationToken cancellationToken)
+    public async Task<ResponseOf<UserResult>> GetById([FromRoute] Guid UserId, CancellationToken cancellationToken)
         => await _userService.Detail(UserId, cancellationToken);
 
     /// <summary>
     /// Add a new user
     /// </summary>
     [HttpPost]
-    public async Task<BaseResponse<RegisterResult<Guid>>> Add([FromBody] UserCreate request, CancellationToken cancellationToken)
+    public async Task<ResponseOf<RegisterResult<Guid>>> Add([FromBody] UserCreate request, CancellationToken cancellationToken)
         => await _userService.Create(request, cancellationToken);
 
     /// <summary>
