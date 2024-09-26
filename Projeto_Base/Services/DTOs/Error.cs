@@ -48,9 +48,10 @@ public class Error
         FieldErrors = new DictionaryError(fieldErrors);
     }
 
-    public void SetStatusCode(HttpStatusCode statusCode)
+    public Error SetStatusCode(HttpStatusCode statusCode)
     {
         _statusCode = statusCode;
+        return this;
     }
 
     public HttpStatusCode? GetStatusCode()
