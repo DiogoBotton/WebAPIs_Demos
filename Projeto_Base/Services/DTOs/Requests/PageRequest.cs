@@ -1,10 +1,15 @@
-﻿using Services.Paginator.Enums;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Services.Paginator.Enums;
+using System.Text.Json.Serialization;
 
 namespace Services.DTOs.Requests;
 
 public abstract class PageRequest
 {
+    [JsonIgnore]
+    [BindNever]
     public virtual int MaxPageSize { get; set; } = 50;
+
     private int _pageSize = 30;
 
     public int Page { get; set; } = 1;
