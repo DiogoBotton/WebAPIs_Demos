@@ -104,7 +104,7 @@ public class UserService : IUserService
 
             var result = await users
                 .ProjectToType<UserResult>()
-                .PaginateBy(request, x => x.Name)
+                .PaginateBy(request)
                 .ToListAsync(cancellationToken);
 
             return new PageResult<UserResult>(result);

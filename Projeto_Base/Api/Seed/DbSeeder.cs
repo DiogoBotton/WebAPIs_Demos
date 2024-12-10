@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Domains.Models.Addresses;
 using Domains.Models.Users;
 using Domains.Services;
 using Infrastructure.Contexts;
@@ -158,6 +159,14 @@ namespace Api.Seed
                 .RuleFor(u => u.Email, f => f.Person.Email)
                 .RuleFor(u => u.Cellphone, f => f.Person.Phone)
                 .RuleFor(u => u.Profile, Domains.Enums.Profile.Common)
+                .RuleFor(u => u.Address, f => new Address
+                {
+                    City = f.Address.City(),
+                    State = f.Address.State(),
+                    Street = f.Address.StreetName(),
+                    Number = f.Address.BuildingNumber(),
+                    Complement = f.Address.SecondaryAddress(),
+                })
                 .Generate(50);
 
             db.Users.AddRange(admins);

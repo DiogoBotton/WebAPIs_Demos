@@ -22,6 +22,11 @@ public class ResponseOf<T> : IResponse
         StatusCode = error.GetStatusCode().HasValue ? error.GetStatusCode().Value : statusCode;
     }
 
+    public static implicit operator ResponseOf<T>(Response response) => new ResponseOf<T>
+    {
+        Error = response.Error,
+        StatusCode = response.Error != null? response.Error.GetStatusCode().HasValue ? response.Error.GetStatusCode().Value : response.StatusCode : response.StatusCode
+    };
 
     public static implicit operator ResponseOf<T>(T data) => new ResponseOf<T>(data);
 
