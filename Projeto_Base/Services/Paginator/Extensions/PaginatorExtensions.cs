@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace Services.Paginator.Extensions;
 
+/// <summary>
+/// Extensões para paginação.
+/// </summary>
 public static class PaginatorExtensions
 {
     /// <summary>
@@ -32,7 +35,7 @@ public static class PaginatorExtensions
     }
 
     /// <summary>
-    /// Pagina e ordena a consulta com base na propriedade especificada.
+    /// Pagina e ordena a consulta de forma dinâmica com base na propriedade especificada.
     /// </summary>
     /// <remarks>
     /// ⚠ **Atenção:** A propriedade informada em <paramref name="SortingProperty"/> do objeto PageRequest deve ser **traduzível para SQL**.
@@ -44,22 +47,17 @@ public static class PaginatorExtensions
         {
             LambdaExpression lambdaExpression = CreateNestedPropertyExpression<T>(request.SortingProperty);
 
-            // Determina se o tipo da propriedade é anulável
             Type propertyType = lambdaExpression.ReturnType;
             bool isNullable = Nullable.GetUnderlyingType(propertyType) != null || !propertyType.IsValueType;
 
-            // Primeiro nível de ordenação
             IOrderedQueryable<T> orderedQuery = request.SortDirection == SortDirection.Ascending
                 ? Queryable.OrderBy(query, (dynamic)lambdaExpression)
                 : Queryable.OrderByDescending(query, (dynamic)lambdaExpression);
 
             if (isNullable)
-            {
-                // Se a propriedade pode ser nula, ordena primeiro pelos valores nulos
                 orderedQuery = request.SortDirection == SortDirection.Ascending
                     ? Queryable.ThenBy(orderedQuery, (dynamic)lambdaExpression)
                     : Queryable.ThenByDescending(orderedQuery, (dynamic)lambdaExpression);
-            }
 
             return orderedQuery
                 .Skip((request.Page - 1) * request.PageSize)

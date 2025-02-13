@@ -102,12 +102,14 @@ public class UserService : IUserService
             if (request.Status.HasValue)
                 users = users.Where(x => x.Status == request.Status);
 
+            var total = await users.CountAsync(cancellationToken);
+
             var result = await users
                 .ProjectToType<UserResult>()
                 .PaginateBy(request)
                 .ToListAsync(cancellationToken);
 
-            return new PageResult<UserResult>(result);
+            return new PageResult<UserResult>(request, total, result);
         }
         catch (Exception)
         {

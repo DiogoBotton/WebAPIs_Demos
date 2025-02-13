@@ -1,17 +1,17 @@
 ﻿namespace Services.Paginator.Enums;
 
 /// <summary>
-/// Sorting direction, ASC or Desc
+/// Enumeração que representa a direção da ordenação.
 /// </summary>
 public enum SortDirection
 {
     /// <summary>
-    /// Ascending sorting direction
+    /// Ascendente.
     /// </summary>
     Ascending,
 
     /// <summary>
-    /// Descending sorting direction
+    /// Descendente.
     /// </summary>
     Descending
 }
